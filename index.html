@@ -1,0 +1,259 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>EJERCICIO SOBRE GENERACIÓN DE UN PANEL DE GRÁFICOS</title>
+
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>	
+	</head>
+	<body>
+		<h1>EJERCICIO SOBRE GENERACIÓN DE UN PANEL DE GRÁFICOS</h1>
+
+		<div class="dashboard-wrapper">
+			<div id='p1' class='panel'><h2>Gráfica 1</h2> <div id='p1Chart'></div> </div>
+			<div id='p2' class='panel'><h2>Gráfica 2</h2> <div id='p2Chart'></div> </div>
+			<div id='p3' class='panel'><h2>Gráfica 3</h2> <div id='p3Chart'></div> </div>
+			<div id='p4' class='panel'><h2>Gráfico 4</h2> <div id='p4Chart'></div> </div>
+			<div id='p5' class='panel'><h2>Gráfico 5</h2> <div id='p5Chart'></div> </div>
+		</div>
+
+		<script>
+			/* Cargamos los módulos que vamos a usar, una vez cargados ejecutará la función 'drawCharts' */
+
+			google.charts.load('current', {'packages':['corechart', 'bar', 'calendar']});
+			google.charts.setOnLoadCallback(drawCharts);
+
+			/* función que carga cada uno de los gráficos */
+			function drawCharts() {
+				drawChartP1();
+				drawChartP2();
+				drawChartP3();
+				drawChartP4();
+				drawChartP5();
+				}
+
+			/* Gráfica 1 - Líneas (Tendencia) */
+
+			function drawChartP1() {
+				/* Cargamos los datos */
+				var data = google.visualization.arrayToDataTable([
+					['Año', 'Pobreza %', 'Pobreza extrema %'],
+    					[ '2008', 44.4, 11.0 ],
+					[ '2010', 46.1, 11.3 ],
+    					[ '2012', 45.5, 9.8 ],
+    					[ '2014', 46.2, 9.5 ],
+    					[ '2016', 43.6, 7.6 ],
+    					[ '2018', 41.9, 7.4 ]
+  					]);
+				
+				var options = {
+					title: 'Evolución del porcentaje de pobreza (2008-2018)',
+					curveType: 'function',
+					height: 300,
+					legend: {position: 'bottom'}
+				};
+
+				/* Creamos la visualización, en este caso se visualizará en el div con id 'p1Chart' */
+
+  				var chart = new google.visualization.LineChart(document.getElementById('p1Chart'));
+
+				/* Finalmente pintamos la visualización, el segundo parámetro son las opciones */
+	
+  				chart.draw(data, options);
+					}
+
+			/* Gráfica 2 - Barras */
+
+			function drawChartP2() {
+				/* Cargamos los datos */
+				var data = google.visualization.arrayToDataTable([
+					['Año', 'Personas en pobreza (Millones)'],
+    					[ '2008', 49.5 ],
+					[ '2010', 52.8 ],
+    					[ '2012', 53.3 ],
+    					[ '2014', 55.3 ],
+    					[ '2016', 53.4 ],
+    					[ '2018', 52.4 ]
+  					]);
+				
+				var options = {
+					title: 'Número de personas en pobreza (millones) (2008-2018)',
+					height: 300,
+					legend: {position: 'none'}
+				};
+
+				/* Creamos la visualización, en este caso se visualizará en el div con id 'p2Chart' */
+
+  				var chart = new google.visualization.ColumnChart(document.getElementById('p2Chart'));
+
+				/* Finalmente pintamos la visualización, el segundo parámetro son las opciones */
+	
+  				chart.draw(data, options);
+					}
+
+			/* Gráfica 3 - Barras horizontales */
+
+			function drawChartP3() {
+				/* Cargamos los datos */
+				var data = google.visualization.arrayToDataTable([
+					['Tipo de carencia ', '% De población'],
+    					[ 'Rezago educativo', 16.9 ],
+					[ 'Acceso a servicios de salud', 16.2 ],
+    					[ 'Acceso a seguridad social', 57.3 ],
+    					[ 'Calidad y espacios de vivienda', 11.1 ],
+    					[ 'Servicios básicos en vivienda', 19.8 ],
+    					[ 'Accesos a alimentación', 20.4 ]
+  					]);
+				
+				var options = {
+					title: 'Carencias Sociales (2018)',
+					bars: 'horizontal',
+					legend: {position: 'none'},
+					height: 400
+				};
+
+				/* Creamos la visualización, en este caso se visualizará en el div con id 'p3Chart' */
+
+  				var chart = new google.charts.Bar(document.getElementById('p3Chart'));
+
+				/* Finalmente pintamos la visualización, el segundo parámetro son las opciones */
+	
+  				chart.draw(data, google.charts.Bar.convertOptions(options));
+					}
+
+			/* Gráfica 4 - Pastel */
+
+			function drawChartP4() {
+				/* Cargamos los datos */
+				var data = google.visualization.arrayToDataTable([
+					['Condición', '% De población'],
+    					[ 'Pobreza extrema', 7.4 ],
+					[ 'Pobreza moderada', 34.5 ],
+    					[ 'Vulnerable por carencias', 29.3 ],
+    					[ 'Vulnerable por ingresos', 6.9 ],
+    					[ 'No pobre y no vulnerable', 21.9 ]
+  					]);
+				
+				var options = {
+					title: 'Distribución de población según condición (2018)',
+					height: 400
+					
+				};
+
+				/* Creamos la visualización, en este caso se visualizará en el div con id 'p4Chart' */
+
+  				var chart = new google.visualization.PieChart(document.getElementById('p4Chart'));
+
+				/* Finalmente pintamos la visualización, el segundo parámetro son las opciones */
+	
+  				chart.draw(data, options);
+					}
+
+			/* Gráfica 5 - Barras horizontales */
+
+			function drawChartP5() {
+				/* Cargamos los datos */
+				var data = google.visualization.arrayToDataTable([
+					['Estado', '% De población'],
+    					[ 'Nuevo León', 14.5 ],
+					[ 'Baja California Sur', 18.1 ],
+    					[ 'Coahuila', 22.5 ],
+    					[ 'Baja California', 23.3 ],
+    					[ 'Aguascalientes', 26.2 ],
+    					[ 'Puebla', 58.9 ],
+					[ 'Veracruz', 61.8 ],
+    					[ 'Oaxaca', 66.4 ],
+    					[ 'Guerrero', 66.5 ],
+    					[ 'Chiapas', 76.4 ]
+  					]);
+				
+				var options = {
+					title: 'Comparación por Entidad Federativa (2018)',
+					legend: {position: 'none'},
+					bars: 'horizontal',
+					height: 400,
+					chartArea: {left: 180}
+					
+				};
+
+				/* Creamos la visualización, en este caso se visualizará en el div con id 'p5Chart' */
+
+  				var chart = new google.visualization.BarChart(document.getElementById('p5Chart'));
+
+				/* Finalmente pintamos la visualización, el segundo parámetro son las opciones */
+	
+  				chart.draw(data, options);
+					}
+
+
+
+		</script>
+
+		<style>
+			/* Color de fondo azul, tipo de letra helvetica. El 'text-align: center' es para centrar el dashboard */
+
+			body {
+				text-align: center;
+				background-color: #cfe2f3;
+				font-family: 'Helvetica', sans-serif;
+				}
+
+			/* Quitamos los margenes de los títulos tipo 2. Los de los distintos paneles */
+
+			h2 {
+				margin: 0px;
+				}
+
+			/* Márgenes en auto para que quede centrado en la página. Tamaño máximo de 1220 píxeles. configuración del grid a 2 columnas con un espaciado de 15 píxeles. */
+
+			.dashboard-wrapper {
+				margin: auto;
+				max-width: 1220px;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				grid-column-gap: 15px;
+				grid-row-gap: 15px;
+				}
+
+			/* Configuración de cada panel: texto alineado a la izquierda, color de fondo blanco, etc. */
+
+			.dashboard-wrapper .panel {
+				text-align: left;
+				background-color: #fff;
+				border: 1px solid #d3d3d3;
+				box-shadow: 0 0 4px 1px rgba(143,143,143,.2);
+				padding: 15px;
+				}
+
+			/* Los paneles con Id p5 ocuparan de la columna 1 a la 3 */
+
+			.dashboard-wrapper #p5.panel {
+				grid-column: 1 / 3;
+				}
+
+			/* Configuración del footer */
+
+			.bottom {
+				font-size: 10px;
+				margin-top: 15px;
+				}
+
+			.bottom a {
+				color: #333;
+				text-decoration: none;
+				}
+	
+			/* Configuración responsive: para dispositivos con pantalla de máximo 104 píxeles de resolución. todos los paneles ocuparán de la columna 1 a la 4 */
+
+			@media screen and (max-width: 1024px) {
+				.dashboard-wrapper .panel {
+					grid-column: 1 / 4;
+					}	
+				}
+
+	
+		</style>
+	</body>
+
+</html>
